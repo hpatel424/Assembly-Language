@@ -1,0 +1,80 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/19/21 11:19:13
+jump2.asm						     Page 1 - 1
+
+
+				.586
+				.MODEL FLAT
+				.STACK  4096            ; reserve 4096-byte stack
+ 00000000			.DATA                   ; reserve storage for data
+ 00000000 FFFFFF38		cmpvalue DWORD 0FFFFFF38H
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+ 00000000			     codebegin:
+ 00000000  B8 0000004F		        mov eax, 00000004Fh
+ 00000005  3B 05 00000000 R	        cmp eax, cmpvalue
+ 0000000B  7C 3A		        jl jmpaddress
+ 0000000D  3B 05 00000000 R	        cmp eax, cmpvalue
+ 00000013  72 32		        jb jmpaddress
+ 00000015  83 F8 4F		        cmp eax, 04fh
+ 00000018  74 2D		        je jmpaddress
+ 0000001A  83 F8 4F		        cmp eax,79
+ 0000001D  75 28		        jne jmpaddress
+ 0000001F  83 3D 00000000 R	        cmp cmpvalue,0
+	   00
+ 00000026  76 1F		        jbe jmpaddress
+ 00000028  81 3D 00000000 R	        cmp cmpvalue,-200
+	   FFFFFF38
+ 00000032  7D 13		        jge jmpaddress
+ 00000034  05 000000C8		        add eax,200
+ 00000039  78 0C		        js jmpaddress
+ 0000003B  81 05 00000000 R	        add cmpvalue, 200
+	   000000C8
+ 00000045  74 00		        jz jmpaddress
+ 00000047			    jmpaddress:
+ 00000047  B8 00000000		        mov eax,0
+ 0000004C  C3			        ret
+ 0000004D			main    ENDP
+
+				END          ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/19/21 11:19:13
+jump2.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000004 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004D Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004D Public
+  codebegin  . . . . . . . . . .	L Near	 00000000 _TEXT	
+  jmpaddress . . . . . . . . . .	L Near	 00000047 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+cmpvalue . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors

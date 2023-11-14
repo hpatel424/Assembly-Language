@@ -1,0 +1,69 @@
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/12/21 11:42:49
+Lab-7Mul-Div.asm					     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  Harry Patel
+				; Date:    09/13/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+				;value dword 0FFFFFF3AH
+ 00000000 FC			count byte 0FCH
+
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+				        
+ 00000000  66| B8 FF75		        mov ax, 0FF75H
+ 00000004  F6 3D 00000000 R	        idiv count
+				        
+ 0000000A  C3			        ret
+ 0000000B			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/12/21 11:42:49
+Lab-7Mul-Div.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000001 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000000B Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000000B Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+count  . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors

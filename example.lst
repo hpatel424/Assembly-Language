@@ -1,0 +1,147 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    12/16/21 21:37:41
+example.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds two numbers
+				; Author: Harry Patel
+				; Date:    09/21/2021
+
+				.586
+				.MODEL FLAT
+
+				INCLUDE io.h            ; header file for input/output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+				.STACK 4096
+
+ 00000000			.DATA
+ 00000000 00000001		number1 DWORD   1
+ 00000004 00000002		number2 DWORD   2
+ 00000008 00000003		number3 DWORD   3
+ 0000000C 00000004		number4 DWORD   4
+ 00000010 00000005		number5 DWORD   5
+ 00000014 00000006		number6 DWORD   6
+ 00000018 00000007		number7 DWORD   7
+
+
+ 0000001C  00000028 [		string  BYTE    40 DUP (?)
+	    00
+	   ]
+ 00000044 54 68 65 20 72	resultLbl BYTE  "The result is", 0
+	   65 73 75 6C 74
+	   20 69 73 00
+ 00000052  0000000B [		sum     BYTE    11 DUP (?), 0
+	    00
+	   ] 00
+
+ 00000000			.CODE
+ 00000000			_MainProc PROC
+ 00000000  66| B8 04D2		mov ax, 1234
+ 00000004  66| B9 04D2		mov cx, 1234
+ 00000008  66| 51		push cx
+ 0000000A  66| F7 D1		not cx
+ 0000000D  66| C1 C9 10		ror cx, 16
+ 00000011  66| 23 C1		and ax, cx
+ 00000014  B8 00000014		mov eax, 20
+ 00000019  03 CA		add ecx,edx
+				       
+ 0000001B  B8 00000000		        mov     eax, 0  ; exit with return code 0
+ 00000020  C3			        ret
+ 00000021			_MainProc ENDP
+				END                             ; end of source code
+
+				fild number1
+				fild number2
+				fild number3
+				fild number4
+				fild number5
+				fild number6
+				fild number7
+
+				finit 
+				fld1
+				fld1
+				fld st(1)
+				fld st(1)
+
+				finit
+				fld1
+				fldpi
+				fldl2e
+				fmul st(0), st(1)
+				fcomp
+
+				 fadd
+				       fadd st(1), st
+				       fadd st, st(5)
+				       faddp st(3), st
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    12/16/21 21:37:41
+example.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000005E Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000021 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc  . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000021 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+number1  . . . . . . . . . . . .	DWord	 00000000 _DATA	
+number2  . . . . . . . . . . . .	DWord	 00000004 _DATA	
+number3  . . . . . . . . . . . .	DWord	 00000008 _DATA	
+number4  . . . . . . . . . . . .	DWord	 0000000C _DATA	
+number5  . . . . . . . . . . . .	DWord	 00000010 _DATA	
+number6  . . . . . . . . . . . .	DWord	 00000014 _DATA	
+number7  . . . . . . . . . . . .	DWord	 00000018 _DATA	
+resultLbl  . . . . . . . . . . .	Byte	 00000044 _DATA	
+string . . . . . . . . . . . . .	Byte	 0000001C _DATA	
+sum  . . . . . . . . . . . . . .	Byte	 00000052 _DATA	
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors

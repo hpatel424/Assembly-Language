@@ -1,0 +1,127 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/30/21 17:15:18
+test.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- String Operation
+				; Author: Harry Patel
+				; Date:    11/2/2021
+
+				.586
+				.MODEL FLAT
+
+				INCLUDE io.h            ; header file for input/output
+			      C ; IO.H -- header file for I/O macros (listing suppressed)
+			      C .NOLIST      ; turn off listing
+			      C .LIST        ; begin listing
+			      C 
+
+				.STACK 4096
+
+ 00000000			.DATA
+ 00000000 54 68 65 20 6D	outLbl byte "The modified string is", 0
+	   6F 64 69 66 69
+	   65 64 20 73 74
+	   72 69 6E 67 20
+	   69 73 00
+ 00000017 41 42 43 44 45	string byte  "ABCDEFGHIJ", 0
+	   46 47 48 49 4A
+	   00
+
+
+ 00000000			.CODE
+
+ 00000000			_MainProc1 PROC
+
+
+
+
+				;setup code 4
+ 00000000  8D 35 00000020 R	       lea esi, string+9       ;end of string
+ 00000006  8D 3D 0000001E R	       lea edi, string+7        ; address of 'H'
+ 0000000C  FD			       std                     ; backward movement set direction flag=1
+				      
+
+ 0000000D  A4			       movsb                ; move 4 characters 
+ 0000000E  A4			       movsb
+ 0000000F  A4			       movsb
+ 00000010  A4			       movsb
+				       output outLbl, string    ;display modified string
+
+				       
+ 0000002A  B8 00000000		        mov     eax, 0  ; exit with return code 0
+ 0000002F  C3			        ret
+ 00000030			_MainProc1 ENDP
+				END                             ; end of source code
+
+				; setup code 1
+				       lea esi, string      ; beginning of string
+				       lea edi, string+5    ; address of 'F'
+				       cld                  ; Forward movement
+
+				; setup code 2
+				       lea esi, string      ; beginning of string
+				       lea edi, string+2    ; address of 'c'
+				       cld                  ; forward movement by setting direction flag to 0
+
+				; setup code 3
+				        lea esi, string+9       ; beginning of string
+				        lea edi, string+4       ; address of 'E'
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/30/21 17:15:18
+test.asm						     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+atod . . . . . . . . . . . . . .	Proc
+atow . . . . . . . . . . . . . .	Proc
+dtoa . . . . . . . . . . . . . .	Proc
+input  . . . . . . . . . . . . .	Proc
+output . . . . . . . . . . . . .	Proc
+wtoa . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000022 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000030 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+_MainProc1 . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000030 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_getInput  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_showOutput  . . . . . . . . . .	L Near	 00000000 FLAT	External
+atodproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+atowproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+dtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+outLbl . . . . . . . . . . . . .	Byte	 00000000 _DATA	
+string . . . . . . . . . . . . .	Byte	 00000017 _DATA	
+wtoaproc . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+
+	   0 Warnings
+	   0 Errors

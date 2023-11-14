@@ -1,0 +1,106 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/13/21 10:46:32
+PrimeNumber.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  Harry Patel
+				; Date:    09/13/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+
+ 00000000 00000002		prime   DWORD   2,3
+	   00000003
+
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+ 00000000  B8 00000002		        mov eax, 2      ;count = 2
+ 00000005  BB 00000005		        mov ebx, 5      ; candidate = 5
+ 0000000A			        Bigloop:
+ 0000000A  83 F8 64		        cmp eax, 100
+ 0000000D  7F 3A		        jg L2
+ 0000000F  B9 00000001		        mov ecx, 1      ; index = 1
+ 00000014  8D 35 00000000 R	        lea esi, prime
+ 0000001A			        whileloop:
+ 0000001A  50			        push eax
+ 0000001B  3B C8		        cmp ecx, eax
+ 0000001D  7F 17		        jg L3
+ 0000001F  BA 00000000		        mov edx, 0
+				        
+ 00000024  8B 06		        mov eax, [esi]
+ 00000026  83 C6 04		        add esi, 4
+ 00000029  F7 F3		        div ebx
+				       
+ 0000002B  58			        pop eax
+ 0000002C  83 FA 00		        cmp edx,0
+ 0000002F  74 05		        je L4
+ 00000031  83 C1 01		        add ecx, 1
+ 00000034  EB E4		        jmp whileloop
+ 00000036			        L4:
+ 00000036			        L3:
+ 00000036  3B C8		        cmp ecx, eax
+ 00000038  7E 0A		        jle L5
+ 0000003A  01 1C 85		        add prime [eax*4], ebx
+	   00000000 R
+ 00000041  83 C0 01		        add eax, 1
+ 00000044			        L5:
+ 00000044  83 C3 02		        add ebx, 2
+ 00000047  EB C1		        jmp Bigloop
+ 00000049			        L2:
+ 00000049  B8 00000000		        mov   eax, 0            ; exit with return code 0
+ 0000004E  C3			        ret
+ 0000004F			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    11/13/21 10:46:32
+PrimeNumber.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000008 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000004F Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000004F Public
+  Bigloop  . . . . . . . . . . .	L Near	 0000000A _TEXT	
+  whileloop  . . . . . . . . . .	L Near	 0000001A _TEXT	
+  L4 . . . . . . . . . . . . . .	L Near	 00000036 _TEXT	
+  L3 . . . . . . . . . . . . . .	L Near	 00000036 _TEXT	
+  L5 . . . . . . . . . . . . . .	L Near	 00000044 _TEXT	
+  L2 . . . . . . . . . . . . . .	L Near	 00000049 _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+prime  . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,92 @@
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/05/21 10:50:36
+addNsub.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  sai hemanth thota
+				; Date:    09/13/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+
+				;wordOp word 10
+
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+				     
+				    ;mov ebx, 4294967295
+				    ;neg ebx
+
+				    ;mov eax, 1
+				    ;dec eax
+				    
+				    ;mov cx, 3377
+				    ;inc cx
+				    
+				    
+				    ;mov ebx, 6357298
+				    ;mov ecx, 4280618869
+				    ;sub ebx, ecx
+				    
+				    
+ 00000000  BB FF0DF975		      mov ebx, 4279105909
+ 00000005  B9 01C0A192		      mov ecx, 29401490
+ 0000000A  03 D9		      add ebx, ecx
+				      
+				      
+				      ;add dx, wordOp
+				       ;sub bl, dh
+				       ;inc ecx
+				       ;dec cl
+				       ;neg ebx
+
+ 0000000C  B8 00000000		        mov   eax, 0            ; exit with return code 0
+ 00000011  C3			        ret
+ 00000012			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30133.0	    10/05/21 10:50:36
+addNsub.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000012 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000012 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors

@@ -1,0 +1,105 @@
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/28/21 18:38:59
+32Bit.asm						     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  Harry Patel
+				; Date:    09/16/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+ 00000000 FFFFFF97		number  DWORD   -105
+
+ 00000004 4D 69 64 54 65	mystring BYTE "MidTerm-2021;",0
+	   72 6D 2D 32 30
+	   32 31 3B 00
+ 00000012 00000000		sum     DWORD   ?
+
+ 00000000			.CODE                   ; start of main program code
+ 00000000			add2 PROC
+ 00000000  55			    push ebp
+ 00000001  8B EC		    mov ebp, esp
+ 00000003  8B 45 08		    mov eax, [ebp+8]
+ 00000006  03 45 0C		    add eax, [ebp+12]
+ 00000009  5D			    pop ebp
+ 0000000A  C3			    ret
+ 0000000B			add2 ENDP
+
+ 0000000B			calc proc
+ 0000000B  55			push ebp
+ 0000000C  8B EC		mov ebp, esp
+ 0000000E  53			push ebx
+ 0000000F  8B 45 08		mov  eax, [ebp+8]
+ 00000012  03 45 0C		add eax, [ebp+12]
+ 00000015  8B 5D 08		mov ebx, [ebp+8]
+ 00000018  2B 5D 0C		sub ebx, [ebp+12]
+ 0000001B  F7 E3		mul ebx
+ 0000001D  5B			pop ebx 
+ 0000001E  5D			pop ebp
+ 0000001F  C3			ret
+ 00000020			calc endp
+
+ 00000020			main    PROC
+				        ;mov     eax, number     ; first number to EAX
+				        ;add     eax, 158        ; add 158
+				        ;mov     sum, eax        ; sum to memory
+				        
+ 00000020  E8 FFFFFFE6		      call calc
+
+
+
+ 00000025  B8 00000000		        mov   eax, 0            ; exit with return code 0
+ 0000002A  C3			        ret
+ 0000002B			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30136.0	    10/28/21 18:38:59
+32Bit.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000016 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 0000002B Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+add2 . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000000B Public
+calc . . . . . . . . . . . . . .	P Near	 0000000B _TEXT	Length= 00000015 Public
+main . . . . . . . . . . . . . .	P Near	 00000020 _TEXT	Length= 0000000B Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+mystring . . . . . . . . . . . .	Byte	 00000004 _DATA	
+number . . . . . . . . . . . . .	DWord	 00000000 _DATA	
+sum  . . . . . . . . . . . . . .	DWord	 00000012 _DATA	
+
+	   0 Warnings
+	   0 Errors

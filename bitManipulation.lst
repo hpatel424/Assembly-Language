@@ -1,0 +1,180 @@
+Microsoft (R) Macro Assembler Version 14.29.30146.0	    09/06/22 12:01:19
+bitManipulation.asm					     Page 1 - 1
+
+
+				; Example assembly language program -- adds 158 to number in memory
+				; Author:  Harry Patel
+				; Date:    09/13/2021
+				comment & we can comment in this 
+				way to &
+
+				.586
+				.MODEL FLAT
+
+				.STACK  4096            ; reserve 4096-byte stack
+
+ 00000000			.DATA                   ; reserve storage for data
+
+
+ 00000000			.CODE                           ; start of main program code
+ 00000000			main    PROC
+				;-------------7.1.1--------------------------
+				        ;a
+ 00000000  66| BB FA75		        mov     bx, 0fa75h     
+ 00000004  66| B9 3102		        mov     cx, 03102h        
+ 00000008  66| 23 D9		        and bx, cx
+				        ;b
+ 0000000B  66| BB FA75		        mov bx, 0fa75h
+ 0000000F  66| B9 3102		        mov cx, 03102h
+ 00000013  66| 0B D9		        or bx, cx
+				        ;c
+ 00000016  66| BB FA75		        mov bx, 0fa75h
+ 0000001A  66| B9 3102		        mov cx, 03102h
+ 0000001E  66| 33 D9		        xor bx, cx
+				        ;d
+ 00000021  66| BB FA75		        mov bx, 0fa75h
+ 00000025  66| F7 D3		        not bx
+				        ;e
+ 00000028  66| B8 FA75		        mov ax, 0fa75h
+ 0000002C  66| 83 E0 0F		        and ax, 000fh
+ 00000030  0D F0000000		        or eax, 0f0000000h
+				        ;f
+ 00000035  66| B8 FA75		        mov ax, 0fa75h
+ 00000039  66| 83 C8 F0		        or ax, 0fff0h
+				        ;g
+ 0000003D  66| B8 FA75		        mov ax, 0fa75h
+ 00000041  66| 83 F0 FF		        xor ax, 0ffffh
+				        ;h
+ 00000045  66| B8 FA75		        mov ax, 0fa75h
+ 00000049  66| A9 0004		        test ax, 0004h
+				        ;i
+ 0000004D  66| B9 8EBA		        mov cx, 08ebah
+ 00000051  66| F7 D1		        not cx
+				        ;j
+ 00000054  66| B9 8EBA		        mov cx, 08ebah
+ 00000058  66| 81 C9 EDF2	        or cx, 0edf2h
+				        ;k
+ 0000005D  66| B9 8EBA		        mov cx, 08ebah
+ 00000061  66| 81 E1 EDF2	        and cx, 0edf2h
+				        ;l
+ 00000066  66| B9 8EBA		        mov cx, 08ebah
+ 0000006A  66| 81 F1 EDF2	        xor cx, 0edf2h
+				        ;m
+ 0000006F  66| B9 8EBA		        mov cx, 08ebah
+ 00000073  66| F7 C1 EDF2	        test cx, 0edf2h
+				        ;n
+ 00000078  66| BA B6A3		        mov dx, 0b6a3h
+ 0000007C  66| F7 D2		        not dx
+				        ;o
+ 0000007F  66| BA B6A3		        mov dx, 0b6a3h
+ 00000083  66| 81 CA 64C8	        or dx, 64c8h
+				        ;p
+ 00000088  66| BA B6A3		        mov dx, 0b6a3h
+ 0000008C  66| 81 E2 64C8	        and dx, 64c8h
+				        ;q
+ 00000091  66| BA B6A3		        mov dx, 0b6a3h
+ 00000095  66| 81 F2 64C8	        xor dx, 64c8h
+				        ;r
+ 0000009A  66| BA B6A3		        mov dx, 0b6a3h
+ 0000009E  66| F7 C2 64C8	        test dx, 64c8h
+				;-------------7.2.1--------------------------
+				        ;a
+ 000000A3  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000A7  66| D1 E0		        shl ax,1
+				        ;b
+ 000000AA  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000AE  66| D1 E8		        shr ax,1
+				        ;c
+ 000000B1  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000B5  66| D1 F8		        sar ax,1
+				        ;d
+ 000000B8  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000BC  66| D1 C0		        rol ax,1
+				        ;e
+ 000000BF  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000C3  66| D1 C8		        ror ax,1
+				        ;f
+ 000000C6  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000CA  B1 04		        mov cl,004h
+ 000000CC  66| D3 E0		        sal ax,cl
+				        ;g
+ 000000CF  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000D3  66| C1 E8 04		        shr ax,4
+				        ;h
+ 000000D7  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000DB  B1 04		        mov cl, 004h
+ 000000DD  66| D3 F8		        sar ax,cl
+				        ;i
+ 000000E0  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000E4  B1 04		        mov cl, 004h
+ 000000E6  66| D3 C0		        rol ax,cl
+				        ;j
+ 000000E9  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000ED  66| C1 C8 04		        ror ax,4
+				        ;k
+ 000000F1  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000F5  F9			        stc                 ;set carry flag to 1
+ 000000F6  66| D1 D0		        rcl ax,1
+				        ;l
+ 000000F9  66| B8 A8B5		        mov ax, 0a8b5h
+ 000000FD  F8			        clc                 ;clear carry flag to 0
+ 000000FE  66| D1 D8		        rcr ax,1
+				        ;m
+ 00000101  66| BB 8EBA		        mov bx, 08ebah
+ 00000105  66| C1 E3 03		        shl bx,3
+				        ;n
+ 00000109  66| BB 8EBA		        mov bx, 08ebah
+ 0000010D  66| C1 EB 03		        shr bx,3
+				        ;o
+ 00000111  66| BB 8EBA		        mov bx, 08ebah
+ 00000115  66| C1 E3 03		        sal bx,3
+				        ;p
+ 00000119  66| BB 8EBA		        mov bx, 08ebah
+ 0000011D  66| C1 FB 03		        sar bx,3
+
+
+
+ 00000121  B8 00000000		        mov   eax, 0            ; exit with return code 0
+ 00000126  C3			        ret
+ 00000127			main    ENDP
+
+				END                             ; end of source code
+Microsoft (R) Macro Assembler Version 14.29.30146.0	    09/06/22 12:01:19
+bitManipulation.asm					     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000127 Para	  Public  'CODE'	
+
+
+Procedures, parameters, and locals:
+
+                N a m e                 Type     Value    Attr
+
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 00000127 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+
+	   0 Warnings
+	   0 Errors
